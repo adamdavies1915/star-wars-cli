@@ -6,7 +6,7 @@ class App {
   searchService = new SearchService();
 
   public main() {
-    // Establish a connection with the API server
+    // Bootstap search prompt by asking user input on socket connection
     const socket = io('http://starwarsAPI:3000');
 
     socket.on('connect', () => {
@@ -18,10 +18,7 @@ class App {
       });
 
       rl.question('Enter a search query: ', query => {
-        // Send a 'search' event to the server with the query as the payload
         socket.emit('search', { query });
-
-        // Close the readline interface
         rl.close();
       });
     });
@@ -30,7 +27,7 @@ class App {
     socket.on('search', (results: any) => {
       const output = this.searchService.outputSearch(results);
       console.log(output.output);
-      // If this is the last message in the stream, ask for a new search
+      // If this is the last message in the stream, ask for user for a new search
       if (output.isLastMessage) {
         const rl = readline.createInterface({
           input: process.stdin,
