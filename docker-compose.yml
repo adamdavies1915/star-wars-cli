@@ -1,0 +1,34 @@
+version: '3.7'
+
+services:
+  cli:
+    build:
+      context: ./
+      target: development-build-stage
+      dockerfile: Dockerfile
+    container_name: cli
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    restart: 'unless-stopped'
+    networks:
+      - backend
+    links:
+      - starWarsAPI
+    depends_on:
+      - starWarsAPI
+  starWarsAPI:
+    image: clonardo/socketio-backend
+    container_name: starWarsAPI
+    ports:
+      - '3000:3000'
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  data:
+    driver: local

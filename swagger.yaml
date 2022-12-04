@@ -1,0 +1,35 @@
+tags:
+- name: users
+  description: users API
+
+paths:
+  /cars:
+    post:
+      tags:
+      - users
+      summary: Upload CSV file
+      description: Upload CSV file
+      operationId: uploadCSV
+      consumes:
+      - multipart/form-data
+      produces:
+      - application/json
+      parameters:
+      - name: file
+        in: formData
+        description: CSV file to upload
+        required: true
+        type: file
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+schemes:
+ - https
+ - http
