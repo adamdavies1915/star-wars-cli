@@ -4,5 +4,6 @@ This is a CLI application that allows you to search for Star Wars characters and
 
 ## How to run
 
-If you have docker installed, you can run the application with the following command:
+If you have docker installed, you can run the application with the following command and get an interactive prompt:
 ``` docker-compose run --rm cli ```
+
